@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Sub-Categorias de {{params.get("categoria_name")}}</title>
+  </head>
+  <h1>Sub-Categorias de {{params.get("categoria_name")}}</h1>
+  <body style="padding: 20px">
+    <style>
+      body {
+        color: black;
+      }
+    </style>
+    {% if cursor %}
+    <body>
+      <table border="2px">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in cursor %}
+          <tr>
+            <td>{{ record[0] }}</td>
+              <td><a href="remover_categoria?categoria_name={{ record[0] }}"> Remover  </a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </body>
+    {% else %}
+    <p>A categoria não tem sub-categorias disponiveis.</p>
+    {% endif %}
+  </body>
+</html>

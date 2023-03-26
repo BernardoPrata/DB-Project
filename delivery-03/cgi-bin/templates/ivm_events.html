@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Eventos de reposição da IVM
+    </title>
+</head>
+<body style="padding:20px">
+<h1> IVM  {{params.get("num_Serie")}} {{params.get("fabricante")}}</h1>
+<style>
+    body {
+      color: black;
+    }
+    </style>
+{% if cursor_evento  %}
+<body>
+    <h3>Eventos de Reposição:</h3>
+    <table cellspacing="3" bgcolor="#ffffff" border="1px">
+        <thead>
+            <tr>
+                <th> Ean </th>
+                <th> Numéro da prateleira </th>
+                <th> Instante </th>
+                <th> Unidades Repostas </th>
+                <th> Retalhista Responsável </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in cursor_evento %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% else %}
+    <p> Erro: não foi possível obter os dados dos retalhistas da base de dados!</p>
+{% endif %}
+</body>
+<body>
+    {% if cursor_categoria %}
+    <body>
+        <h3>Por Categoria:</h3>
+        <table cellspacing="3" bgcolor="#ffffff" border="1px">
+            <thead>
+                <tr>
+                    <th> Categoria </th>
+                    <th> Unidades Repostas </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in cursor_categoria %}
+                    <tr>
+                        <td>{{ record[0] }}</td>
+                        <td>{{ record[1] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <body>
+        <small>Só são apresentadas as categorias diretas repostas na IVM {{params.get("num_Serie")}} {{params.get("fabricante")}}</small>
+    </body>
+    </body>
+    {% else %}
+        <p> Erro: não foi possível obter os dados dos retalhistas da base de dados!</p>
+    {% endif %}
+
+
+</body>
+</html>

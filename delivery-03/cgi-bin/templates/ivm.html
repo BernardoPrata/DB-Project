@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lista IVMs</title>
+</head>
+<body style="padding:20px">
+<h1>IVMs</h1>
+<style>
+    body {
+      color: black;
+    }
+    </style>
+{% if cursor %}
+<body>
+    <table border="2px">
+        <thead>
+            <tr>
+                <th> Número Série </th>
+                <th> Fabricante </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in cursor %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td><a href="ivm_events?num_Serie={{ record[0] }}&fabricante={{record[1]}}">Listar Eventos</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% else %}
+    <p> Erro: não foi possível obter os dados sobre as IVMs</p>
+{% endif %}
+</body>
+</html>

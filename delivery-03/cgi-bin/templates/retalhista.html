@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lista Retalhistas</title>
+</head>
+<body style="padding:20px">
+<h1>Retalhistas</h1>
+<style>
+    body {
+      color: black;
+    }
+    </style>
+<body>
+    <h3>Inserir novo retalhista</h3>
+    <form action="insert_retalhista" method="post">
+    <p>TIN: <input type="text" name="insert_tin"/></p>
+    <p>Nome: <input type="text" name="insert_nome"/></p>
+    <p><input type="submit" value="Submit"/></p>
+    </form>
+</body>
+<body>
+    
+{% if cursor %}
+<body>
+    <h3>Retalhistas</h3>
+    <table border="2px">
+        <thead>
+            <tr>
+                <th> TIN </th>
+                <th> Nome </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in cursor %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td><a href="delete_retalhista?retailer_id={{ record[0] }}">Remover</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% else %}
+    <p> Erro: não foi possível obter os dados dos retalhistas da base de dados!</p>
+{% endif %}
+</body>
+</html>

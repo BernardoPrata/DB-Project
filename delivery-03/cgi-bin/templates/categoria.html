@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Categorias </title>
+    </head>
+    <h1> Categorias </h1>
+
+
+<body style="padding:20px">
+
+<style>
+    body {
+      color: black;
+    }
+    </style>
+
+<body>
+    <h3>Inserir nova Categoria</h3>
+    <form action="insert_categoria" method="post">
+    <p>Nome: <input type="text" name="insert_nome"/></p>
+    <p><input type="submit" value="Submit"/></p>
+    </form>
+</body>
+<body>
+    <h3>Inserir sub-Categoria em Categoria</h3>
+    <form action="insert_sub_categoria" method="post">
+    <p>Nome Categoria Pai: <input type="text" name="super-categoria"/></p>
+    <p>Nome Sub-Categoria : <input type="text" name="categoria"/></p>
+    <small>Tanto a categoria pai, como a sub-categoria têm que existir.</small>
+    <body></body>
+    <p><input type="submit" value="Submit"/></p>
+    </form>
+</body>
+    
+{% if cursor %}
+<body>
+    <table border="2px">
+        <thead>
+            <tr>
+                <th> Nome </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in cursor %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td><a href="sub_categorias?categoria_name={{ record[0] }}"> Listar Sub-Categorias </a></td>
+                    <td><a href="remover_categoria?categoria_name={{ record[0] }}"> Remover  </a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% else %}
+    <p> Erro: não foi possível obter os dados dos retalhistas da base de dados!</p>
+{% endif %}
+</body>
+</html>
